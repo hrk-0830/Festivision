@@ -22,9 +22,11 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @comment = Comment.new
   end
 
   def edit
+    @event = Event.find(params[:id])
   end
 
   private
@@ -34,12 +36,12 @@ class EventsController < ApplicationController
   end
 
 
-  def ensure_correct_customer
-    @post = Post.find(params[:id])
-    @customer = @post.customer
-    unless @customer == current_customer
+  def ensure_correct_user
+    @event = Event.find(params[:id])
+    @user = @event.user
+    unless @user == current_user
       flash[:danger] = "他のユーザーの情報は編集できません。"
-      redirect_to public_posts_path
+      redirect_to root_path
     end
   end
 

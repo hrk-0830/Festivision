@@ -1,6 +1,16 @@
 class Event < ApplicationRecord
   has_one_attached :image
-  
+
+  belongs_to :user
+  has_many :favorites, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
+  validates :name, presence: true
+  validates :overview, presence: true
+  validates :prefecture_status, presence: true
+  validates :start_time, presence: true
+  validates :image, presence: true
+
   enum prefecture_status:{
      "---":0,
      北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,

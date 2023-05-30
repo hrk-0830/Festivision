@@ -1,53 +1,43 @@
 <div class="container my-5">
   <h5>
-    <%= link_to public_customer_path(@event.customer.id) do %>
-      <%= @event.customer.name %>
+    <%= link_to user_path(@event.user.id) do %>
+      <%= @event.user.name %>
     <% end %>
     のレビュー
   </h5>
   <div class="row">
     <div class="col-md-5">
-      <h3 class="my-5"><strong><%= @event.golf_course %></strong></h3>
+      <h3 class="my-5"><strong><%= @event.name %></strong></h3>
     </div>
     <div class="col-md-3 my-5"></div>
     <div class="col-md-2 my-5">
       <h4><%= @event.prefecture_status_i18n %></h4>
     </div>
-    <div class="col-md-2 my-5">
-      <% if @event.star? %>
-        <% for i in 1..@event.star do %>
-          <i class="fas fa-star text-warning"></i>
-        <% end %>
-      <% end %>
-    </div>
   </div>
 
   <div class="row">
     <div class="col-md-10">
-        <%= image_tag @event.get_image, width: "100%" %>
+        <%= image_tag @event.image, width: "100%" %>
     </div>
     <div class="col-md-2"></div>
   </div>
 
   <div class="row my-5">
     <div class="col-md-8">
-      <h4><strong><%= @event.title %></strong></h4>
-    </div>
-    <div class="col-md-4">
-      <h4><%= @event.difficulty_status_i18n %></h4>
+      <h4><strong>特徴</strong></h4>
     </div>
   </div>
 
   <div class="row my-5">
     <div class="col-md-8">
-      <%= @event.review %>
+      <%= @event.overview %>
     </div>
     <div class="col-md-4"></div>
   </div>
 
   <div class="row my-5">
     <div class="col-md-3">
-      <%= render "public/favorites/btn", post: @event %>
+      <!--%= render "favorites/btn", post: @event %>-->
     </div>
     <div class="col-md-9"></div>
   </div>
@@ -55,18 +45,13 @@
   <div class="row my-5">
     <div class="col-md-6">
       <div id ="comments_area">
-        <%= render "public/post_comments/form", post: @event, post_comment: @event_comment %>
+        <%= render "comments/form", event: @event, comment: @comment %>
       </div>
     </div>
-    <div class="col-md-4 my-3">
-      <h5>タグ一覧</h5>
-      <% @event.tags.each do |tag| %>
-        <%= link_to tag.name, public_tag_path(tag) %>|
-      <% end %>
-    </div>
-    <% if @event.customer == current_customer %>
+    <div class="col-md-4 my-3"></div>
+    <% if @event.user == current_user %>
       <div class="col-md-2 my-5">
-        <%= link_to "編集する", edit_public_post_path(@event), class: "btn btn-primary" %>
+        <%= link_to "編集する", edit_event_path(@event), class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>
@@ -82,17 +67,17 @@
           </tr>
         </thead>
         <tbody>
-          <% @event.post_comments.each do |post_comment| %>
+          <% @event.comments.each do |comment| %>
           <tr>
             <td>
-              <%= link_to public_customer_path(post_comment.customer) do %>
-                <%= post_comment.customer.name %>
+              <%= link_to user_path(comment.user) do %>
+                <%= comment.user.name %>
               <% end %>
             </td>
-            <td><%= post_comment.comment %></td>
+            <td><%= comment.comment %></td>
             <td>
-              <% if post_comment.customer == current_customer %>
-                <%= link_to "削除", public_post_post_comment_path(@event, post_comment), method: :delete, data: { confirm: '本当に消しますか？' }, remote: true, class: "btn btn-danger pull-right" %>
+              <% if comment.user == current_user %>
+                <%= link_to "削除", event_comment_path(@event, comment), method: :delete, data: { confirm: '本当に消しますか？' }, remote: true, class: "btn btn-danger pull-right" %>
               <% end %>
             </td>
           </tr>
