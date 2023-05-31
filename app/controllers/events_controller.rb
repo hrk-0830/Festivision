@@ -28,6 +28,17 @@ class EventsController < ApplicationController
   def edit
     @event = Event.find(params[:id])
   end
+  
+  def update
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to event_path(@event)
+      flash[:announce] = "編集に成功しました"
+    else
+      flash[:danger] = "必要情報を入力してください"
+      redirect_to edit_event_path(@event)
+    end
+  end
 
   private
 
