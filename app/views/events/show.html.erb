@@ -37,9 +37,14 @@
 
   <div class="row my-5">
     <div class="col-md-3">
-      <!--%= render "favorites/btn", post: @event %>-->
+      <%= render "favorites/btn", event: @event %>
     </div>
-    <div class="col-md-9"></div>
+    <div class="col-md-7"></div>
+    <% if @event.user == current_user %>
+      <div class="col-md-2 my-5">
+        <%= link_to "編集する", edit_event_path(@event), class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
 
   <div class="row my-5">
@@ -48,16 +53,7 @@
         <%= render "comments/form", event: @event, comment: @comment %>
       </div>
     </div>
-    <div class="col-md-4 my-3"></div>
-    <% if @event.user == current_user %>
-      <div class="col-md-2 my-5">
-        <%= link_to "編集する", edit_event_path(@event), class: "btn btn-primary" %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class ="row my-5">
-    <div class ="col-md-6">
+    <div class="col-md-6 my-5">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -85,6 +81,5 @@
         </tbody>
       </table>
     </div>
-    <div class ="col-md-6"></div>
   </div>
 </div>

@@ -1,0 +1,11 @@
+<% if event.favorited?(current_user) %>
+  <%= link_to event_favorites_path(event), method: :delete, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+    <%= event.favorites.count %>
+  <% end %>
+<% else %>
+  <%= link_to event_favorites_path(event), method: :post, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true"></i>
+    <%= event.favorites.count %>
+  <% end %>
+<% end %>

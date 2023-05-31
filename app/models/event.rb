@@ -11,6 +11,11 @@ class Event < ApplicationRecord
   validates :start_time, presence: true
   validates :image, presence: true
 
+
+  def favorited?(user)
+   favorites.exists?(user_id: user.id)
+  end
+
   enum prefecture_status:{
      "---":0,
      北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,
