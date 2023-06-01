@@ -6,11 +6,12 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <%= month_calendar events: @events do |date, events| %>
+      <%= month_calendar events: @events, partial: 'simple_calendar/month_calendar' do |date, events| %>
         <%= date.day %>
-        <% events.each do |event| %>
-        <%= link_to event.name, event_path(event.id)%>
-        <% end %>
+          <% events.each do |event| %>
+            <p><%= link_to event.name, event_path(event.id) %></p>
+          <% end %>
+        <div class="mt-auto"></div>
       <% end %>
     </div>
   </div>
