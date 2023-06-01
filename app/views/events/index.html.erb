@@ -9,7 +9,7 @@
       <%= month_calendar events: @events, partial: 'simple_calendar/month_calendar' do |date, events| %>
         <%= date.day %>
           <% events.each do |event| %>
-            <p><%= link_to event.name, event_path(event.id) %></p>
+            <%= link_to event.name, event_path(event.id) %>
           <% end %>
         <div class="mt-auto"></div>
       <% end %>
