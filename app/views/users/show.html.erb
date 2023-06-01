@@ -38,20 +38,7 @@
 
   <h3 class="text-center"><%= @user.name %>の投稿一覧</h3>
   <div class="row my-5">
-    <% @events.each do |event| %>
-      <div class="col-md-2">
-        <div class="card">
-          <%= link_to event_path(event) do %>
-            <%= image_tag event.image, class: "card-img-top img-fluid" %>
-          <% end %>
-          <div class="card-body">
-            <h5 class="card-title"><%= event.name %></h5>
-            <p class="card-text">
-              <%= event.prefecture_status_i18n %>
-            </p>
-          </div>
-        </div>
-      </div>
-    <% end %>
+    <%= render 'events/index',events: @events %>
+    <%= paginate @events, theme: 'twitter-bootstrap-4' %>
   </div>
 </div>

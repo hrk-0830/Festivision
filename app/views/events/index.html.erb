@@ -8,13 +8,17 @@
     <div class="col-md-12">
       <%= month_calendar events: @events, partial: 'simple_calendar/month_calendar' do |date, events| %>
         <%= date.day %>
-          <% events.each do |event| %>
-            <div>
-              <%= link_to event.name, event_path(event.id) %>
-            </div>
-          <% end %>
-        <div class="mt-auto"></div>
+        <% events.each do |event| %>
+          <div>
+            <%= link_to event.name, event_path(event.id) %>
+          </div>
+        <% end %>
       <% end %>
     </div>
+  </div>
+
+  <div class="row my-5">
+    <%= render 'events/index',events: @events %>
+    <%= paginate @events, theme: 'twitter-bootstrap-4' %>
   </div>
 </div>

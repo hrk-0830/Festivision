@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: :index
   before_action :ensure_correct_user, only: [:edit, :update, :destry]
-  
+
   def new
     @event = Event.new
   end
@@ -19,7 +19,7 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.all
+    @events = Event.all.page(params[:page]).order(created_at: :desc)
   end
 
   def show
@@ -64,7 +64,7 @@ class EventsController < ApplicationController
       redirect_to root_path
     end
   end
-  
+
   def ensure_correct_user
     @event = Event.find(params[:id])
     @user = @event.user
