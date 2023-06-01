@@ -22,6 +22,16 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+  
+  def followings
+    @user = User.find(params[:id])
+    @users = @user.followings.page(params[:page])
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers.page(params[:page])
+  end
 
 
   private
@@ -31,11 +41,12 @@ class UsersController < ApplicationController
   end
 
   def ensure_correct_user
-    @user = user.find(params[:id])
+    @user = User.find(params[:id])
     unless @user == current_user
       flash[:danger] = "他のユーザーの情報は編集できません。"
       redirect_to user_path(current_user)
     end
   end
+
 
 end

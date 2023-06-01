@@ -58,3 +58,5 @@ gem 'devise'
 gem 'simple_calendar', '~> 2.0'
 gem "enum_help"
 gem 'rails-i18n'
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
