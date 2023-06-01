@@ -29,7 +29,9 @@
       <h5><%= @event.prefecture_status_i18n %></h5>
       <h5 class="my-3"><%= render "favorites/btn", event: @event %></h5>
       <div class="custom-margin"></div>
-      <%= link_to "編集", edit_event_path(@event), class: "btn btn-primary" %>
+      <% if @event.user == current_user %>
+        <%= link_to "編集", edit_event_path(@event), class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
 

@@ -19,8 +19,9 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = Event.all.page(params[:page]).order(created_at: :desc)
+    @events = Event.all.page(params[:page]).per(12).order(created_at: :desc)
   end
+
 
   def show
     @event = Event.find(params[:id])
@@ -70,7 +71,7 @@ class EventsController < ApplicationController
     @user = @event.user
     unless @user == current_user
       flash[:danger] = "他のユーザーの情報は編集できません。"
-      redirect_to public_events_path
+      redirect_to events_path
     end
   end
 
