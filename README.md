@@ -56,6 +56,9 @@ $ rails db:seed
 $ yarn install
 ~~~
 ~~~
+$ yarn add jquery bootstrap@4.6.2 popper.js
+~~~
+~~~
 $ rails active_storage:install
 ~~~
 ~~~
